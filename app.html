@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Garage - Interactive Viewer</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css?v=4">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="me-2">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                </svg>
+                3D Garage
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="app.html">3D App</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="app-layout">
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <h3 class="mb-4">Control Panel</h3>
+
+                <!-- Model Selection -->
+                <div class="control-section">
+                    <h4>Select Model</h4>
+                    <div class="btn-group-custom" id="car-select-group">
+                        <button class="btn btn-outline-primary car-select-btn active" data-car="1">Car 1</button>
+                        <button class="btn btn-outline-primary car-select-btn" data-car="2">Car 2</button>
+                        <button class="btn btn-outline-primary car-select-btn" data-car="3">Car 3</button>
+                    </div>
+                </div>
+
+                <!-- Import Model -->
+                <div class="control-section">
+                    <h4>Import Model</h4>
+                    <div class="import-section">
+                        <label class="btn btn-outline-primary w-100">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="me-2">
+                                <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
+                            </svg>
+                            Upload File
+                            <input type="file" id="model-upload" accept=".glb,.gltf" style="display: none;">
+                        </label>
+                        <small class="text-muted d-block mt-2">Supported: .glb, .gltf</small>
+                        <small class="text-info d-block mt-1" style="font-size: 11px;">Note: Export .blend as .glb in Blender first</small>
+                    </div>
+                </div>
+
+                <!-- Display Mode -->
+                <div class="control-section">
+                    <h4>Display Mode</h4>
+                    <div class="btn-group-custom">
+                        <button class="btn btn-outline-primary" id="wireframe-btn">Wireframe</button>
+                    </div>
+                </div>
+
+                <!-- Lighting Controls -->
+                <div class="control-section">
+                    <h4>Lighting</h4>
+                    <div class="slider-container">
+                        <label>Ambient Light: <span id="ambient-value">0.5</span></label>
+                        <input type="range" id="ambient-light" min="0" max="1" step="0.1" value="0.5">
+                    </div>
+                    <div class="slider-container mt-3">
+                        <label>Spotlight: <span id="spot-value">1.0</span></label>
+                        <input type="range" id="spot-light" min="0" max="2" step="0.1" value="1">
+                    </div>
+                </div>
+
+                <!-- Camera Views -->
+                <div class="control-section">
+                    <h4>Camera View</h4>
+                    <div class="btn-group-custom">
+                        <button class="btn btn-outline-primary camera-view-btn active" data-view="default">Default</button>
+                        <button class="btn btn-outline-primary camera-view-btn" data-view="front">Front</button>
+                        <button class="btn btn-outline-primary camera-view-btn" data-view="back">Back</button>
+                        <button class="btn btn-outline-primary camera-view-btn" data-view="left">Left</button>
+                        <button class="btn btn-outline-primary camera-view-btn" data-view="right">Right</button>
+                        <button class="btn btn-outline-primary camera-view-btn" data-view="top">Top</button>
+                    </div>
+                </div>
+
+                <!-- Animations -->
+                <div class="control-section">
+                    <h4>Animations</h4>
+                    <div class="btn-group-custom">
+                        <button class="btn btn-primary" id="garage-door-btn">Garage Door</button>
+                        <button class="btn btn-primary" id="car-exit-btn">Car Exit</button>
+                        <button class="btn btn-outline-primary" id="reset-btn">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Car Color -->
+                <div class="control-section">
+                    <h4>Car Body Color</h4>
+                    <div class="color-picker-container">
+                        <input type="color" id="car-color" value="#e74c3c" title="Body Color">
+                        <button class="btn btn-sm btn-outline-primary ms-2" id="apply-color-btn">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Glass Color -->
+                <div class="control-section" id="glass-color-section" style="display: none;">
+                    <h4>Glass Color</h4>
+                    <div class="color-picker-container">
+                        <input type="color" id="glass-color" value="#88ccff" title="Glass Color">
+                        <button class="btn btn-sm btn-outline-primary ms-2" id="apply-glass-color-btn">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Wheel Color -->
+                <div class="control-section" id="wheel-color-section" style="display: none;">
+                    <h4>Wheel Color</h4>
+                    <div class="color-picker-container">
+                        <input type="color" id="wheel-color" value="#333333" title="Wheel Color">
+                        <button class="btn btn-sm btn-outline-primary ms-2" id="apply-wheel-color-btn">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Light Color -->
+                <div class="control-section" id="light-color-section" style="display: none;">
+                    <h4>Light Color</h4>
+                    <div class="color-picker-container">
+                        <input type="color" id="light-color" value="#ffffcc" title="Light Color">
+                        <button class="btn btn-sm btn-outline-primary ms-2" id="apply-light-color-btn">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Light Intensity -->
+                <div class="control-section" id="light-intensity-section" style="display: none;">
+                    <h4>Light Intensity</h4>
+                    <div class="slider-container">
+                        <label>Light: <span id="light-intensity-value">1.0</span></label>
+                        <input type="range" id="light-intensity" min="0" max="3" step="0.1" value="1">
+                    </div>
+                </div>
+
+                <!-- Status Display -->
+                <div class="status-display">
+                    <div class="status-item">
+                        <span class="status-label">Model:</span>
+                        <span class="status-value" id="status-model">Car 1</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Wireframe:</span>
+                        <span class="status-value" id="status-wireframe">OFF</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Camera:</span>
+                        <span class="status-value" id="status-camera">default</span>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="mt-3 p-3 bg-light rounded">
+                    <small>
+                        <strong>Controls:</strong><br>
+                        - Drag: Rotate view<br>
+                        - Scroll: Zoom in/out<br>
+                        - Right-drag: Pan
+                    </small>
+                </div>
+            </div>
+
+            <!-- 3D Canvas Container -->
+            <div class="canvas-container" id="canvas-container">
+                <!-- Three.js canvas will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 3D Garage Showcase. Built for educational purposes.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Three.js -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <!-- Application Scripts -->
+    <script type="module" src="js/main.js?v=4"></script>
+</body>
+</html>

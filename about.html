@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Garage - About</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" class="me-2">
+                    <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+                </svg>
+                3D Garage
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="app.html">3D App</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="text-center mb-5">
+                <h1>About This Project</h1>
+                <p class="lead">Learn about the 3D modeling process, materials, and interaction design</p>
+            </div>
+
+            <!-- Modeling Process -->
+            <div class="about-section fade-in">
+                <h2>3D Modeling Process</h2>
+                <p>This project showcases three low-poly car models created using Blender. Each model was designed with efficiency and visual appeal in mind.</p>
+
+                <h3>Modeling Techniques</h3>
+                <ul>
+                    <li><strong>Box Modeling:</strong> Started with primitive cubes and refined using extrusion, in-setting, and loop cutting</li>
+                    <li><strong>Clean Topology:</strong> Maintained efficient edge loops for smooth deformations</li>
+                    <li><strong>Low-Poly Design:</strong> Optimized polygon count while maintaining visual quality</li>
+                    <li><strong>Real-world Scale:</strong> Models created at proper proportions (approx. 4m length)</li>
+                </ul>
+
+                <h3>Model Variations</h3>
+                <ul>
+                    <li><strong>Car 1 (Red):</strong> Standard sedan with classic proportions</li>
+                    <li><strong>Car 2 (Blue):</strong> Same base model with color variation</li>
+                    <li><strong>Car 3 (Green):</strong> Sport variant with slightly different body shape</li>
+                </ul>
+            </div>
+
+            <!-- Materials Section -->
+            <div class="about-section fade-in">
+                <h2>Materials & Textures</h2>
+                <p>Each car model uses physically-based rendering (PBR) materials to achieve realistic appearance.</p>
+
+                <h3>Material Types</h3>
+                <ul>
+                    <li><strong>Car Body (Metal):</strong>
+                        <ul>
+                            <li>Base Color: Various (Red, Blue, Green)</li>
+                            <li>Metalness: 0.8 (highly metallic)</li>
+                            <li>Roughness: 0.3 (slightly glossy)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Windows (Glass):</strong>
+                        <ul>
+                            <li>Base Color: Dark gray</li>
+                            <li>Metalness: 0.9</li>
+                            <li>Roughness: 0.1 (very smooth)</li>
+                            <li>Transparency: Enabled with 0.8 opacity</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tires (Rubber):</strong>
+                        <ul>
+                            <li>Base Color: Black</li>
+                            <li>Metalness: 0.1 (non-metallic)</li>
+                            <li>Roughness: 0.9 (matte finish)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lights:</strong>
+                        <ul>
+                            <li>Headlights: Emissive white/yellow</li>
+                            <li>Taillights: Emissive red</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Lighting Design -->
+            <div class="about-section fade-in">
+                <h2>Lighting Design</h2>
+                <p>The 3D scene uses a multi-light setup to create a realistic garage environment.</p>
+
+                <h3>Lighting Setup</h3>
+                <ul>
+                    <li><strong>Ambient Light:</strong> Soft overall illumination (intensity: 0.5)
+                        <br><em>Purpose: Prevent completely dark shadows</em>
+                    </li>
+                    <li><strong>Directional Light:</strong> Main sun-like light from above-right
+                        <br><em>Purpose: Cast overall shadows and define shapes</em>
+                    </li>
+                    <li><strong>Spot Light:</strong> Focused overhead light
+                        <br><em>Purpose: Highlight the car from above</em>
+                    </li>
+                    <li><strong>Hemisphere Light:</strong> Sky/ground color gradient
+                        <br><em>Purpose: Add natural ambient variation</em>
+                    </li>
+                </ul>
+
+                <h3>Shadow Configuration</h3>
+                <ul>
+                    <li>Shadow map size: 2048x2048 (directional), 1024x1024 (spot)</li>
+                    <li>Soft shadows enabled (PCFSoftShadowMap)</li>
+                    <li>Shadow camera frustum: 10 units</li>
+                </ul>
+            </div>
+
+            <!-- Interaction Logic -->
+            <div class="about-section fade-in">
+                <h2>Interaction Design</h2>
+                <p>The application provides intuitive controls for exploring the 3D models.</p>
+
+                <h3>Mouse Controls</h3>
+                <ul>
+                    <li><strong>Left-click + Drag:</strong> Rotate camera around the car</li>
+                    <li><strong>Scroll Wheel:</strong> Zoom in/out</li>
+                    <li><strong>Right-click + Drag:</strong> Pan the view</li>
+                </ul>
+
+                <h3>UI Controls</h3>
+                <ul>
+                    <li><strong>Model Selection:</strong> Switch between three car variants</li>
+                    <li><strong>Wireframe Mode:</strong> Toggle to view mesh structure</li>
+                    <li><strong>Lighting Sliders:</strong> Adjust ambient and spot light intensity</li>
+                    <li><strong>Camera Presets:</strong> Quick access to predefined views</li>
+                </ul>
+
+                <h3>Animations</h3>
+                <ul>
+                    <li><strong>Garage Door:</strong> Opens and closes automatically</li>
+                    <li><strong>Car Exit:</strong> Car drives out and returns</li>
+                    <li><strong>Camera Transitions:</strong> Smooth animated camera movement</li>
+                </ul>
+            </div>
+
+            <!-- Accessibility -->
+            <div class="about-section fade-in">
+                <h2>Accessibility Considerations</h2>
+                <ul>
+                    <li><strong>Keyboard Navigation:</strong> All buttons are accessible via keyboard</li>
+                    <li><strong>High Contrast:</strong> UI elements use sufficient color contrast</li>
+                    <li><strong>Clear Labels:</strong> All controls have descriptive labels</li>
+                    <li><strong>Responsive Design:</strong> Works on various screen sizes</li>
+                    <li><strong>Alternative Views:</strong> Multiple camera angles for different needs</li>
+                </ul>
+            </div>
+
+            <!-- Technical Stack -->
+            <div class="about-section fade-in">
+                <h2>Technical Implementation</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>Frontend</h3>
+                        <ul>
+                            <li>HTML5 for structure</li>
+                            <li>CSS3 with Bootstrap 5</li>
+                            <li>JavaScript ES6 Modules</li>
+                            <li>Three.js for 3D rendering</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>3D Tools</h3>
+                        <ul>
+                            <li>Blender for modeling</li>
+                            <li>GLB format for export</li>
+                            <li>PBR materials workflow</li>
+                            <li>Three.js for rendering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 3D Garage Showcase. Built for educational purposes.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
