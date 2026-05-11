@@ -43,7 +43,16 @@ export function playGarageDoorAnimation(callback) {
         return;
     }
 
-    if (isAnimating) return;
+    if (isAnimating) {
+        console.log('Animation already in progress, skipping...');
+        return;
+    }
+
+    // Cancel any ongoing animation
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
 
     // Check current door state
     if (garageDoorState === 'closed') {
@@ -155,9 +164,18 @@ export function playCarExitAnimation(callback) {
         return;
     }
     
+    if (isAnimating) {
+        console.log('Animation already in progress, skipping...');
+        return;
+    }
+    
     console.log('Car Exit animation: Using model:', model.name);
 
-    if (isAnimating) return;
+    // Cancel any ongoing animation
+    if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+    }
 
     isAnimating = true;
     setControlsEnabled(false);
@@ -171,9 +189,10 @@ export function playCarExitAnimation(callback) {
     const duration = 4000;
     const startTime = Date.now();
 
-    // Keep car facing forward
+    // Rotate car to face forward based on model orientation
     const startRotY = model.rotation.y;
-    const endRotY = 0;
+    // Car 3 needs different rotation (model is inverted)
+    const endRotY = model.name === 'car3' ? -Math.PI / 2 : Math.PI / 2;
 
     function animate() {
         const elapsed = Date.now() - startTime;

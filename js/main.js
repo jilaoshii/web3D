@@ -182,6 +182,21 @@ function setupEventListeners() {
             changeLightColor(carId, AppState.lightColor);
             changeLightIntensity(carId, AppState.lightIntensity);
             updateColorControlsVisibility(carId);
+            
+            // Reset camera and animations after model switch
+            stopAnimations();
+            AppState.isAnimating = false;
+            
+            const scene = getScene();
+            if (scene) {
+                const garageDoor = scene.getObjectByName('garageDoor');
+                if (garageDoor) {
+                    garageDoor.position.y = 0;
+                }
+            }
+            
+            resetCamera('default');
+            AppState.currentCameraView = 'default';
         });
     });
 
@@ -326,12 +341,11 @@ function setupEventListeners() {
     const garageDoorBtn = document.getElementById('garage-door-btn');
     if (garageDoorBtn) {
         garageDoorBtn.addEventListener('click', () => {
-            if (!AppState.isAnimating) {
-                AppState.isAnimating = true;
-                playGarageDoorAnimation(() => {
-                    AppState.isAnimating = false;
-                });
-            }
+            garageDoorBtn.blur(); // Remove focus
+            AppState.isAnimating = true;
+            playGarageDoorAnimation(() => {
+                AppState.isAnimating = false;
+            });
         });
     }
 
@@ -339,12 +353,11 @@ function setupEventListeners() {
     const carExitBtn = document.getElementById('car-exit-btn');
     if (carExitBtn) {
         carExitBtn.addEventListener('click', () => {
-            if (!AppState.isAnimating) {
-                AppState.isAnimating = true;
-                playCarExitAnimation(() => {
-                    AppState.isAnimating = false;
-                });
-            }
+            carExitBtn.blur(); // Remove focus
+            AppState.isAnimating = true;
+            playCarExitAnimation(() => {
+                AppState.isAnimating = false;
+            });
         });
     }
 
@@ -352,11 +365,41 @@ function setupEventListeners() {
     const resetBtn = document.getElementById('reset-btn');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            stopAnimations();
-            AppState.isAnimating = false;
-            resetCamera('default');
-            AppState.currentCameraView = 'default';
-            updateStatusDisplay();
+            console.log('Reset button clicked');
+            resetBtn.blur(); // Remove focus
+            
+            try {
+                stopAnimations();
+                AppState.isAnimating = false;
+                console.log('Animations stopped');
+                
+                // Reset garage door
+                const scene = getScene();
+                if (scene) {
+                    const garageDoor = scene.getObjectByName('garageDoor');
+                    if (garageDoor) {
+                        garageDoor.position.y = 0;
+                        console.log('Garage door reset');
+                    }
+                }
+                
+                // Reset car position and rotation
+                const model = getCurrentModel();
+                if (model) {
+                    // Save the initial Y position (ground level)
+                    const initialY = model.position.y;
+                    model.position.set(0, initialY, 0);
+                    model.rotation.set(0, 0, 0);
+                    console.log('Car position and rotation reset');
+                }
+                
+                resetCamera('default');
+                AppState.currentCameraView = 'default';
+                updateStatusDisplay();
+                console.log('Reset complete');
+            } catch (error) {
+                console.error('Reset error:', error);
+            }
         });
     }
 
